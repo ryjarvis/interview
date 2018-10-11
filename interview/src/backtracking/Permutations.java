@@ -53,14 +53,27 @@ public class Permutations {
     	nums[i]=nums[j];
     	nums[j]=temp;
     }
+    
+    public static void permutation(String s){
+    	helper(s.toCharArray(),1);
+    }
+    
+    public static void helper(char[]c,int level){
+    	System.out.println(String.valueOf(c));
+    	for(int i=level;i<c.length;i++){
+    		swap(c,level-1,i);
+    		helper(c,level+1);
+    		swap(c,level-1,i);
+    	}
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String s="abcd";
-		permute(s);
-		int[]nums={1,2,3};
+		String s="abc";
+		permutation(s);
+		/*int[]nums={1,2,3};
 		List<List<Integer>> res=permute(nums);
-		System.out.println(res.size());
+		System.out.println(res.size());*/
 
 	}
 

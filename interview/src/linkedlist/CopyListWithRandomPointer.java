@@ -88,6 +88,36 @@ public class CopyListWithRandomPointer {
     	}
     	return map.get(iter);
     }
+    
+    public RandomListNode copyRandomListOptimized(RandomListNode head) {
+        if(head==null){
+            return null;
+        }
+        RandomListNode copy;
+        RandomListNode dummy=new RandomListNode(0);
+        copy=dummy;
+        while(head!=null){
+             copy.next=new RandomListNode(head.label);
+            if(head.random!=null){
+                copy.next.random=new RandomListNode(head.random.label);
+            }
+            copy=copy.next;
+            head=head.next;
+        }
+        return dummy.next;
+    }
+    
+    public RandomListNode copyRandomListRecursive(RandomListNode head) {
+        if(head==null){
+            return null;
+        }
+        RandomListNode copy=new RandomListNode(head.label);
+        if(head.random!=null){
+           copy.random=new RandomListNode(head.random.label); 
+        }
+        copy.next=copyRandomList(head.next);
+        return copy;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

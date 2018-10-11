@@ -81,6 +81,28 @@ public class LetterCombinationsOfPhoneNumber {
 		return result;
 		
 	}
+	
+    public List<String> letterCombinationsOptimized(String digits) {
+        final char[][] c={{'a','b','c'},{'d','e','f'},{'g','h','i'},{'j','k','l'},{'m','n','o'},{'p','q','r','s'},
+                         {'t','u','v'},{'w','x','y','z'}};
+        List<String> res=new ArrayList<>();
+        if(digits.length()==0) return res;
+        helper(res,digits,0,c,new StringBuilder());
+        return res;   
+    }
+    
+    public void helper(List<String> res,String digits,int level,char[][]c,StringBuilder sb){
+        if(level==digits.length()){
+            res.add(sb.toString());
+            return;
+        }
+        int idx=digits.charAt(level)-'0'-2;
+        for(char ch:c[idx]){
+            sb.append(ch);
+            helper(res,digits,level+1,c,sb);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

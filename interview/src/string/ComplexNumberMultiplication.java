@@ -18,6 +18,21 @@ public class ComplexNumberMultiplication {
         int h=(b*c)+(a*d);
         return g+"+"+h+"i";  
     }
+    
+    public String complexNumberMultiplyClean(String a, String b) {
+        int[]res1=helper(a),res2=helper(b);
+        int real=res1[0]*res2[0]-res1[1]*res2[1];
+        int img=res1[0]*res2[1]+res2[0]*res1[1];
+        return real+"+"+img+"i";    
+    }
+    
+    public int[]helper(String s){
+        String[]tok=s.split("\\+");
+        int[]res=new int[2];
+        res[0]=Integer.valueOf(tok[0]);
+        res[1]=Integer.valueOf(tok[1].substring(0,tok[1].length()-1));
+        return res;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

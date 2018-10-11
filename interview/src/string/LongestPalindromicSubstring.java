@@ -71,6 +71,49 @@ public class LongestPalindromicSubstring {
 	 * temp = c[j]; c[j] = c[i]; c[i] = temp; i++; j--; } reverse = new
 	 * String(c); return reverse; }
 	 */
+	
+	public String longestPalindromeBetter(String s) {
+        int n=s.length();
+        int max=0;
+        String res="";
+        if(n==1){
+            res=s;
+        }
+        char[]c=s.toCharArray();
+        boolean[][] mem=new boolean[n][n];
+        for(int i=n-1;i>=0;i--){
+            mem[i][i]=true;
+            for(int j=i+1;j<n;j++){
+                if(c[i]==c[j]&&(mem[i+1][j-1]||j<=i+2)){
+                    mem[i][j]=true;
+                    if(j-i+1>max){
+                        res=s.substring(i,j+1);
+                        max=j-i+1;
+                    }
+                }
+            }
+        }
+        return res;  
+    }
+	
+	public String longestPalindromeClean(String s) {
+		  int n = s.length();
+		  String res = null;
+		    
+		  boolean[][] dp = new boolean[n][n];
+		    
+		  for (int i = n - 1; i >= 0; i--) {
+		    for (int j = i; j < n; j++) {
+		      dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 3 || dp[i + 1][j - 1]);
+		            
+		      if (dp[i][j] && (res == null || j - i + 1 > res.length())) {
+		        res = s.substring(i, j + 1);
+		      }
+		    }
+		  }
+		    
+		  return res;
+		}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

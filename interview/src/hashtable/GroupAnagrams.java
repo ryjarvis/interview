@@ -2,9 +2,11 @@ package hashtable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Set;
 
 //LeetCode #49
 public class GroupAnagrams {
@@ -53,10 +55,34 @@ public class GroupAnagrams {
 		}
 		return res;
 	}
+	
+    public static List<List<String>> groupAnagramsTest(String[] strs) {
+        // write your code here
+        List<List<String>> res=new ArrayList<>();
+        Map<String,Integer>map=new HashMap<>();
+        for(String s:strs){
+                char[]c=s.toCharArray();
+                Arrays.sort(c);
+                String key=String.valueOf(c);
+                Integer val=map.get(key);
+                if(val==null){
+                    map.put(key,res.size());
+                    List<String> list=new ArrayList<>();
+                    list.add(s);
+                    res.add(list);
+                }
+                else{
+                    res.get(val).add(s);
+                }
+        }
+        return res;
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		String[]strs={"",""};
+		List<List<String>>res=groupAnagramsTest(strs);
+		List<List<String>>res2=groupAnagrams(strs);
 	}
 
 }

@@ -130,6 +130,42 @@ public class MaximumWidthOfBST {
 		int right=dfsWidth(root.right,start,end,(2*parentIdx)+1,level+1);
 		return Math.max(cur, Math.max(left, right));
 	}
+	
+    public int widthOfBinaryTreeOptimized(TreeNode root) {
+        int max=0;
+        if(root==null){
+            return max;
+        }
+        Queue<TreeNode> q=new LinkedList<>();
+        root.val=1;
+        q.add(root);
+        int first=0,last=0;
+        int oldSize=1;
+        while(!q.isEmpty()){
+            Queue<TreeNode> aux=new LinkedList<>();
+            while(!q.isEmpty()){
+                if(q.size()==oldSize){
+                    first=q.peek().val;
+                }
+                TreeNode node=q.poll();
+
+                if(node.left!=null){
+                    node.left.val=2*(node.val);
+                    aux.add(node.left);
+                }
+                if(node.right!=null){
+                    node.right.val=2*(node.val)+1;
+                    aux.add(node.right);
+                }
+                last=node.val;
+            }
+            max=Math.max(max,last-first+1);
+            q=aux;
+            oldSize=q.size();
+        }
+        
+        return max;
+    }
 
 	public static void main(String[] args) {
 		MaximumWidthOfBST m = new MaximumWidthOfBST();

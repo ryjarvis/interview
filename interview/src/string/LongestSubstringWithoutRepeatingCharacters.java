@@ -1,5 +1,6 @@
 package string;
 
+import java.util.Arrays;
 import java.util.BitSet;
 //leetcode #3
 public class LongestSubstringWithoutRepeatingCharacters {
@@ -58,6 +59,25 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	            ans = Math.max(ans, i-start+1);
 	        }
 	        return ans;
+	    }
+	    
+	    public int lengthOfLongestSubstringII(String s) {
+	        int res=0;
+	        int slow=0;
+	        int[]pos=new int[256];
+	        Arrays.fill(pos,-1);
+	        for(int i=slow;i<s.length();i++){
+	            int c=(int)s.charAt(i);
+	            if(pos[c]!=-1&&pos[c]>=slow){
+	                res=Math.max(res,i-slow);
+	                slow=pos[c]+1;
+	            }
+	            if(i==s.length()-1){
+	                res=Math.max(res,i-slow+1);
+	            }
+	            pos[c]=i;
+	        }
+	        return res;
 	    }
 	
 

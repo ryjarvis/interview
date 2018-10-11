@@ -35,10 +35,25 @@ public class Subsets {
     	avail.add(0,num);
     }
     
+    public static List<List<Integer>> subsetsI(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        helper(res,new ArrayList<>(),nums,0);
+        return res;
+    }
+    
+    public static void helper(List<List<Integer>> res,List<Integer> aux,int[]nums,int level){
+        res.add(new ArrayList<Integer>(aux));
+        for(int i=level;i<nums.length;i++){
+            aux.add(nums[i]);
+            helper(res,aux,nums,i+1);
+            aux.remove(aux.size()-1);
+        }
+    }
+    
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int [] ar={1,2,3};
-		List<List<Integer>>res=subsets(ar);
+		List<List<Integer>>res=subsetsI(ar);
 	}
 
 }

@@ -39,6 +39,53 @@ public class SetMatrixZeroes {
     	}
         
     }
+    
+    public void setZeroesOptimized(int[][] mat) {
+        int m=mat.length;
+        int n=mat[0].length;
+        int row=-1;
+        int col=-1;
+        for(int i=0;i<m;i++){
+            if(row!=-1&&i==row){
+                continue;
+            }
+            for(int j=0;j<n;j++){
+                if(col!=-1&&j==col){
+                    continue;
+                }
+                if(mat[i][j]==0){
+                    if(row==-1){
+                       row=i;
+                        col=j; 
+                    }
+                    else{
+                        mat[i][col]=0;
+                        mat[row][j]=0;
+                    }
+                }
+            }
+        }
+        if(row==-1){
+            return;
+        }
+        for(int i=0;i<m;i++){
+            if(i==row){
+                continue;
+            }
+            if(mat[i][col]==0){
+                Arrays.fill(mat[i],0);
+            }
+        }
+        for(int j=0;j<n;j++){
+            if(mat[row][j]==0){
+                for(int i=0;i<m;i++){
+                    mat[i][j]=0;
+                }
+            }
+        }
+        
+        Arrays.fill(mat[row],0); 
+    }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

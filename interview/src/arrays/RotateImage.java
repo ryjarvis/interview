@@ -22,6 +22,25 @@ public class RotateImage {
 			size-=2;
 		}
 	}
+	
+    public void rotateOptimized(int[][] mat) {
+        // write your code here
+        int n=mat.length;
+        int level=n+1>>1;
+        int i=0;
+        int j=n-1;
+       for(int k=0;k<level;k++){
+           for(int c=i;c<j;c++){
+               int temp=mat[i][c];
+               mat[i][c]=mat[j-c+i][i];
+               mat[j-c+i][i]=mat[j][j-c+i];
+               mat[j][j-c+i]=mat[c][j];
+               mat[c][j]=temp;
+           }
+           i++;
+           j--;
+       }
+    }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

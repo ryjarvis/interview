@@ -1,5 +1,7 @@
 package heap;
 
+import java.util.TreeSet;
+
 //LeetCode #239
 public class SlidingWindowMaximum {
 	// the idea here is find the upper max from the node and find the lower max
@@ -37,11 +39,35 @@ public class SlidingWindowMaximum {
 		}
 		return max;
 	}
+	
+	public static int[] maxSlidingWindowTreeSet(int[] nums, int k) {
+		if(nums.length==0) return new int[0];
+		TreeSet<Integer> set=new TreeSet<>((a,b)->{
+			if(nums[a]!=nums[b]){
+				return nums[b]-nums[a];
+			}
+			else{
+				return b-a;
+			}
+			
+		});
+		int []max=new int[nums.length-k+1];
+		for(int i=0;i<k;i++){
+			set.add(i);
+		}
+		for(int i=k;i<nums.length;i++){
+			max[i-k]=nums[set.first()];
+			set.remove(i-k);
+			set.add(i);
+		}
+		max[max.length-1]=nums[set.first()];
+		return max;
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] ar = { 1, 3, -1, -3, 5, 3, 6, 7 };
-		int[] res = maxSlidingWindow(ar, 3);
+		int[] ar = { -7,-8,7,5,7,1,6,0};
+		int[] res = maxSlidingWindowTreeSet(ar, 4);
 
 	}
 

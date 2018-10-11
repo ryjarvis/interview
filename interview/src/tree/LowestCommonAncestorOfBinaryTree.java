@@ -60,6 +60,23 @@ public class LowestCommonAncestorOfBinaryTree {
     	path.remove(path.indexOf(root));
     	return false;
     }
+    
+    public TreeNode lowestCommonAncestorOptimized(TreeNode root, TreeNode A, TreeNode B) {
+        if(root==A||root==B||root==null){
+           return root;
+       }
+       TreeNode left=lowestCommonAncestor(root.left,  A, B);
+       TreeNode right=lowestCommonAncestor(root.right,  A, B);
+       if(right!=null&&left!=null){
+           return root;
+       }
+       else if(left!=null&&right==null){
+           return left;
+       }
+       else{
+           return right;
+       }
+   }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
